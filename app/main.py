@@ -4,6 +4,11 @@ from bson.objectid import ObjectId
 import gridfs
 import os  # Import os module
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import HTTPException, Request
+from fastapi.responses import FileResponse
+from gtts import gTTS
+from uuid import uuid4
+
 
 # Initialize FastAPI application
 app = FastAPI()
