@@ -1,0 +1,7 @@
+{
+  "build": {
+    "env": {
+      "MONGO_URI": "mongodb://username:password@your_mongo_host:27017/space_pod_db"
+    }
+  }
+}
