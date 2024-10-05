@@ -2,9 +2,10 @@ from fastapi import FastAPI
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import gridfs
+import os  # Import os module
 from fastapi.middleware.cors import CORSMiddleware
 
-# Initialize Flask application
+# Initialize FastAPI application
 app = FastAPI()
 
 # CORS setup
@@ -18,7 +19,7 @@ app.add_middleware(
 )
 
 # Connect to your Remote MongoDB database
-client = MongoClient("mongodb://username:password@your_mongo_host:27017/space_pod_db")
+client = MongoClient(os.environ.get("MONGO_URI"))  # Use environment variable
 db = client["space_pod_db"]  # Replace with your database name
 collection = db["planets"]   # Replace with your collection name
 
@@ -57,7 +58,7 @@ def get_planet_by_name(planet_name: str):
     else:
         return {"error": "Planet not found"}
 
-# Add the following line if needed for Railway
+# If needed for local testing
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
